@@ -545,7 +545,22 @@
   renderMercado();
   renderJornada();
 }
+// Cargar y escuchar datos en tiempo real desde Firebase
+database.ref('liga_sla').on('value', (snapshot) => {
+  const data = snapshot.val();
+  if (data) {
+    if (data.usersDB) usersDB = data.usersDB;
+    if (data.equiposLigaMX) equiposLigaMX = data.equiposLigaMX;
+    if (data.resultadosPartidos) resultadosPartidos = data.resultadosPartidos;
+    if (data.favoritos) favoritos = data.favoritos;
 
+    renderTablaGeneral();
+    renderFichas();
+    renderCapitanes();
+    renderMercado();
+    renderJornada();
+  }
+});
     function toggleSidebar() {
       document.getElementById('sidebar').classList.toggle('open');
       document.getElementById('sidebarOverlay').classList.toggle('active');
