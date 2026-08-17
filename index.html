@@ -639,11 +639,21 @@ database.ref('liga_sla').on('value', (snapshot) => {
       const isCap = document.getElementById('regCaptain').value === "true";
 
       if(!name || !pass || !discord) return alert("Completa todos los campos incluyendo Discord.");
-      if(usersDB.some(u => u.name.toLowerCase() === name.toLowerCase())) return alert("GamerTag ya registrado.");
+     // Asegurar que usersDB sea un arreglo
+  const listaUsuarios = Array.isArray(usersDB) ? usersDB : Object.values(usersDB || {});
 
-      currentUser = { name, discord, pass, rank, team: "Libre", isCaptain: isCap, goals: 0, assists: 0, saves: 0, admin: false };
-      usersDB.push(currentUser);
-      saveAllData();
+  // Validar si existe el usuario de forma segura
+  const yaExiste = listaUsuarios.some(u => u && u.name && u.name.trim().toLowerCase() === name.toLowerCase());
+
+  if (yaExiste) {
+    return alert("El usuario ya está registrado.");
+  }
+// Convertir usersDB a lista si Firebase lo devolvió como objeto
+  if (!Array.isArray(usersDB)) usersDB = Object.values(usersDB || {});
+
+  currentUser = { name, discord, pass, rank, team: "Libre", isCaptain: isCap, goals: 0, assists: 0, saves: 0, admin: false };
+  usersDB.push(currentUser);
+  saveAllData();
       updateUIAuth();
       triggerSuccessModal();
     }
