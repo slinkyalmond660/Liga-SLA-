@@ -35,12 +35,7 @@
       display: flex;
     }
 
-    /* ANIMACIONES */
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-    .fade-in { animation: fadeIn 0.3s ease-out forwards; }
-
-    /* TOP BAR MOBILE */
+    /* BARRA SUPERIOR MÓVIL */
     .top-bar {
       display: none;
       justify-content: space-between;
@@ -62,7 +57,7 @@
       cursor: pointer;
     }
 
-    /* SIDEBAR */
+    /* SIDEBAR IZQUIERDA */
     aside {
       width: 260px;
       background-color: var(--sidebar-bg);
@@ -134,13 +129,19 @@
       text-align: center;
     }
 
-    /* MAIN CONTENT */
+    /* LAYOUT DE CONTENIDO */
     main {
       margin-left: 260px;
       flex: 1;
       padding: 30px;
-      max-width: 1200px;
-      width: 100%;
+      width: calc(100% - 260px);
+    }
+
+    .dashboard-layout {
+      display: grid;
+      grid-template-columns: 240px 1fr 280px;
+      gap: 20px;
+      align-items: start;
     }
 
     section {
@@ -149,38 +150,39 @@
 
     section.active {
       display: block;
-      animation: fadeIn 0.3s ease-out forwards;
     }
 
     h2 {
       margin-bottom: 20px;
       font-size: 1.6rem;
       color: var(--text-main);
-      border-left: 4px solid var(--accent-green);
-      padding-left: 12px;
-    }
-
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     .card {
       background-color: var(--card-bg);
       border: 1px solid var(--border-color);
       border-radius: 12px;
-      padding: 20px;
+      padding: 18px;
+      margin-bottom: 20px;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     }
 
-    /* TABLAS CORREGIDAS */
+    .card-title {
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+      color: var(--text-main);
+    }
+
+    /* FIX DEFINITIVO DE TABLAS */
     .table-responsive {
       overflow-x: auto;
       background-color: var(--card-bg);
       border-radius: 12px;
       border: 1px solid var(--border-color);
-      margin-top: 15px;
     }
 
     table {
@@ -191,23 +193,77 @@
       color: var(--text-main) !important;
     }
 
+    table tr, table td, table th {
+      background-color: var(--card-bg) !important;
+      color: var(--text-main) !important;
+    }
+
     th {
-      background-color: var(--sidebar-bg) !important;
+      background-color: #07090e !important;
       color: var(--accent-blue) !important;
-      padding: 12px 16px;
+      padding: 12px 14px;
       font-weight: 600;
       border-bottom: 2px solid var(--border-color);
+      font-size: 0.85rem;
+      text-transform: uppercase;
     }
 
     td {
-      padding: 12px 16px;
+      padding: 12px 14px;
       border-bottom: 1px solid var(--border-color);
-      color: var(--text-main) !important;
-      background-color: var(--card-bg) !important;
+      font-size: 0.9rem;
     }
 
     tr:hover td {
       background-color: rgba(255, 255, 255, 0.03) !important;
+    }
+
+    /* WIDGETS LATERALES Y SCORERS */
+    .match-item {
+      background: var(--bg-dark);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+
+    .match-teams {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      margin: 8px 0;
+      font-weight: bold;
+    }
+
+    .scorer-list {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .scorer-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--bg-dark);
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      font-size: 0.85rem;
+    }
+
+    .avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 0.75rem;
     }
 
     /* FORMULARIOS Y BOTONES */
@@ -218,13 +274,13 @@
     label {
       display: block;
       margin-bottom: 6px;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text-muted);
     }
 
     input, select {
       width: 100%;
-      padding: 10px 14px;
+      padding: 10px 12px;
       background-color: var(--bg-dark);
       border: 1px solid var(--border-color);
       border-radius: 8px;
@@ -232,23 +288,20 @@
       outline: none;
     }
 
-    input:focus, select:focus {
-      border-color: var(--accent-green);
-    }
-
     .btn {
-      background-color: var(--accent-green);
-      color: #000;
+      width: 100%;
+      background-color: var(--accent-blue);
+      color: #fff;
       font-weight: bold;
-      padding: 10px 18px;
+      padding: 10px 14px;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      display: inline-block;
     }
 
-    .btn:hover {
-      opacity: 0.9;
+    .btn-green {
+      background-color: var(--accent-green);
+      color: #000;
     }
 
     .btn-danger {
@@ -257,6 +310,12 @@
     }
 
     /* RESPONSIVE */
+    @media (max-width: 1100px) {
+      .dashboard-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
     @media (max-width: 768px) {
       body { flex-direction: column; }
       .top-bar { display: flex; }
@@ -264,31 +323,30 @@
         transform: translateX(-100%);
         width: 100%;
         max-width: 280px;
-        transition: transform 0.3s ease;
       }
       aside.open { transform: translateX(0); }
-      main { margin-left: 0; padding: 20px 15px; }
+      main { margin-left: 0; width: 100%; padding: 15px; }
     }
   </style>
 </head>
 <body>
 
-  <!-- BARRA SUPERIOR MOVIL -->
+  <!-- TOP BAR MOBILE -->
   <div class="top-bar">
     <div style="font-weight: bold; color: var(--accent-green);">⚡ Liga SLA</div>
     <button class="hamburger" onclick="toggleMenu()">☰</button>
   </div>
 
-  <!-- SIDEBAR -->
+  <!-- SIDEBAR IZQUIERDA -->
   <aside id="sidebar">
     <div class="sidebar-header">
       <span>Menú Liga SLA</span>
       <button class="hamburger" onclick="toggleMenu()" style="font-size:18px;">✕</button>
     </div>
     <nav>
-      <a onclick="showSection('cuenta')" class="active">👤 <span>Mi Cuenta / Registro</span></a>
-      <a onclick="showSection('mercado')">🛒 <span>Mercado (Agentes Libres)</span></a>
-      <a onclick="showSection('tabla')">🏆 <span>Tabla General</span></a>
+      <a onclick="showSection('cuenta')">👤 <span>Mi Cuenta</span></a>
+      <a onclick="showSection('mercado')">🛒 <span>Mercado</span></a>
+      <a onclick="showSection('tabla')" class="active">🏆 <span>Tabla General</span></a>
       <a onclick="showSection('jornadas')">📅 <span>Jornadas y Partidos</span></a>
       <a onclick="showSection('fichas')">⚽ <span>Fichas Jugadores</span></a>
       <a onclick="showSection('capitanes')">💼 <span>Capitanes</span></a>
@@ -303,130 +361,178 @@
     </div>
   </aside>
 
-  <!-- CONTENIDO PRINCIPAL -->
+  <!-- CONTENIDO PRINCIPAL CON ESTRUCTURA DUAL -->
   <main>
 
-    <!-- SECCION CUENTA -->
-    <section id="sec-cuenta" class="active">
-      <h2>Acceso a la Liga SLA</h2>
-      <div class="grid-container">
-        <div class="card">
-          <h3>Registro / Login</h3>
-          <form style="margin-top: 15px;">
-            <div class="form-group">
-              <label>Usuario / Nickname</label>
-              <input type="text" placeholder="Ej: Resorte">
+    <!-- SECCION TABLA GENERAL -->
+    <section id="sec-tabla" class="active">
+      <h2>🏆 Tabla General - Liga MX</h2>
+
+      <div class="dashboard-layout">
+        
+        <!-- PANEL IZQUIERDO: PROXIMOS PARTIDOS -->
+        <div>
+          <div class="card">
+            <div class="card-title">Próximos Partidos Relevantes</div>
+            
+            <div class="match-item">
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Club América - Monterrey</div>
+              <div class="match-teams">
+                <span>GLE</span>
+                <span style="color: var(--accent-green);">VS</span>
+                <span>MX</span>
+              </div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">PJ: 34, G: 22, PTS: 74</div>
             </div>
-            <div class="form-group">
-              <label>Rango Rocket League</label>
-              <select>
-                <option>Platino</option>
-                <option>Diamante</option>
-                <option>Champion</option>
-                <option>Grand Champion</option>
-              </select>
+
+            <div class="match-item">
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Montesiziana - Gro MX</div>
+              <div class="match-teams">
+                <span>SLA</span>
+                <span style="color: var(--accent-green);">VS</span>
+                <span>MX</span>
+              </div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">PJ: 34, G: 22, PTS: 77</div>
             </div>
-            <button type="button" class="btn">Guardar Perfil</button>
-          </form>
+
+            <div class="match-item">
+              <div style="font-size: 0.75rem; color: var(--text-muted);">Tigres UANL - San Sisoa</div>
+              <div class="match-teams">
+                <span>SLA</span>
+                <span style="color: var(--accent-green);">VS</span>
+                <span>MX</span>
+              </div>
+              <div style="font-size: 0.75rem; color: var(--text-muted);">PJ: 34, G: 22, PTS: 75</div>
+            </div>
+          </div>
         </div>
+
+        <!-- PANEL CENTRAL: TABLA Y TOP SCORERS -->
+        <div>
+          <div class="table-responsive">
+            <table>
+              <thead>
+                <tr>
+                  <th>RANGO</th>
+                  <th>MEDIA BASE</th>
+                  <th>PRECIO BASE</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>1. Club América - PJ: 34, G: 22, PTS: 74</td><td>50 Media</td><td>$5,000</td></tr>
+                <tr><td>2. Monterrey - PJ: 34, G: 22, PTS: 71</td><td>60 Media</td><td>$13,000</td></tr>
+                <tr><td>3. Tigres UANL - PJ: 34, G: 19, PTS: 62</td><td>60 Media</td><td>$12,000</td></tr>
+                <tr><td>4. Etrardeneira - PJ: 34, G: 19, PTS: 62</td><td>60 Media</td><td>$11,000</td></tr>
+                <tr><td>5. Club Platito - PJ: 34, G: 19, PTS: 56</td><td>60 Media</td><td>$11,000</td></tr>
+                <tr><td>6. Club Misata - PJ: 34, G: 19, PTS: 50</td><td>60 Media</td><td>$15,000</td></tr>
+                <tr><td>7. Club Afikea - PJ: 34, G: 18, PTS: 49</td><td>60 Media</td><td>$15,000</td></tr>
+                <tr><td>8. Club Efisins - PJ: 34, G: 19, PTS: 50</td><td>70 Media</td><td>$23,000</td></tr>
+                <tr><td>9. Club Barcao - PJ: 34, G: 18, PTS: 49</td><td>70 Media</td><td>$22,000</td></tr>
+                <tr><td>10. Club Gornsa - PJ: 34, G: 17, PTS: 49</td><td>60 Media</td><td>$20,000</td></tr>
+                <tr><td>11. Tigres UANL - PJ: 34, G: 16, PTS: 42</td><td>70 Media</td><td>$20,000</td></tr>
+                <tr><td>12. Juárez FC - PJ: 34, G: 19, PTS: 37</td><td>70 Media</td><td>$19,000</td></tr>
+                <tr><td>13. Club México - PJ: 34, G: 16, PTS: 35</td><td>70 Media</td><td>$17,000</td></tr>
+                <tr><td>14. Club Ultima - PJ: 34, G: 12, PTS: 27</td><td>75 Media</td><td>$15,000</td></tr>
+                <tr><td>15. Punto Ueno - PJ: 34, G: 14, PTS: 29</td><td>73 Media</td><td>$18,000</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="card" style="margin-top: 20px;">
+            <div class="card-title">Top Scorers</div>
+            <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 10px;">Playador</div>
+            <div class="scorer-list">
+              <div class="scorer-item"><div class="avatar">JM</div><div style="flex:1;">Jusa Manuello</div><b>33</b></div>
+              <div class="scorer-item"><div class="avatar">JR</div><div style="flex:1;">Jula Relgaro</div><b>27</b></div>
+              <div class="scorer-item"><div class="avatar">JS</div><div style="flex:1;">Jaurta Salanía</div><b>18</b></div>
+              <div class="scorer-item"><div class="avatar">MI</div><div style="flex:1;">Matuel Asingez</div><b>26</b></div>
+              <div class="scorer-item"><div class="avatar">BA</div><div style="flex:1;">Bamin Alemader</div><b>15</b></div>
+              <div class="scorer-item"><div class="avatar">RF</div><div style="flex:1;">Rongoh Felira</div><b>27</b></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL DERECHO: FILTROS Y ACCIONES -->
+        <div>
+          <div class="card">
+            <div class="card-title">Filtros Avanzados</div>
+            <div class="form-group">
+              <label>Team</label>
+              <select><option>Teamo</option></select>
+            </div>
+            <div class="form-group">
+              <label>Rango</label>
+              <select><option>Sin muted</option></select>
+            </div>
+            <button class="btn">Filtrar</button>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Añadir Marcador de Prueba</div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">
+              Los marcadores se actualizan automáticamente al añadir Marcador de Prueba.
+            </p>
+            <button class="btn btn-green">Añadir Marcador de Prueba</button>
+          </div>
+
+          <div class="card">
+            <div class="card-title">Ver Jugadores Libres con Filtro</div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px;">
+              Ver Jugadores Libres con Filtro de coincidencias con jugadores en Filtro.
+            </p>
+            <button class="btn">Ver Jugadores Libres</button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCION CUENTA -->
+    <section id="sec-cuenta">
+      <h2>Acceso a la Liga SLA</h2>
+      <div class="card" style="max-width: 400px;">
+        <div class="card-title">Registro / Login</div>
+        <div class="form-group">
+          <label>Usuario / Nickname</label>
+          <input type="text" placeholder="Ej: Resorte">
+        </div>
+        <div class="form-group">
+          <label>Rango Rocket League</label>
+          <select><option>Platino</option><option>Diamante</option><option>Champion</option></select>
+        </div>
+        <button class="btn btn-green">Guardar Perfil</button>
       </div>
     </section>
 
     <!-- SECCION MERCADO -->
     <section id="sec-mercado">
       <h2>Mercado de Agentes Libres</h2>
-      <p style="color: var(--text-muted); margin-bottom: 15px;">Jugadores disponibles para ser fichados.</p>
-      <div class="grid-container">
-        <div class="card">
-          <h3>Jugador Ejemplo</h3>
-          <p style="color: var(--text-muted);">Rango: Diamante 2</p>
-          <p style="color: var(--accent-green); margin-top: 10px; font-weight: bold;">Precio: $15,000</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- SECCION TABLA GENERAL -->
-    <section id="sec-tabla">
-      <h2>Tabla General - Liga MX</h2>
-      <div class="table-responsive">
-        <table>
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Equipo</th>
-              <th>PJ</th>
-              <th>G</th>
-              <th>E</th>
-              <th>P</th>
-              <th>DG</th>
-              <th>PTS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td><b>Juárez FC</b></td>
-              <td>5</td>
-              <td>4</td>
-              <td>1</td>
-              <td>0</td>
-              <td>+8</td>
-              <td><b>13</b></td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Mazatlán FC</td>
-              <td>5</td>
-              <td>3</td>
-              <td>0</td>
-              <td>2</td>
-              <td>+2</td>
-              <td><b>9</b></td>
-            </tr>
-            <tr>
-              <td>3</td>
-              <td>Club América</td>
-              <td>5</td>
-              <td>2</td>
-              <td>2</td>
-              <td>1</td>
-              <td>0</td>
-              <td><b>8</b></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="card" style="max-width: 400px;">
+        <div class="card-title">Jugador Ejemplo</div>
+        <p style="color: var(--text-muted);">Rango: Diamante 2</p>
+        <p style="color: var(--accent-green); margin-top: 10px; font-weight: bold;">Precio: $15,000</p>
       </div>
     </section>
 
     <!-- SECCION JORNADAS -->
     <section id="sec-jornadas">
       <h2>Calendario Oficial de Jornadas</h2>
-      <div class="card" style="margin-top: 15px;">
-        <h3>Jornada 5</h3>
-        <p style="margin-top: 10px; color: var(--accent-green); font-weight: bold;">Juárez FC 6 – 3 Mazatlán FC</p>
+      <div class="card">
+        <div class="card-title">Jornada 5</div>
+        <p style="color: var(--accent-green); font-weight: bold;">Juárez FC 6 – 3 Mazatlán FC</p>
       </div>
     </section>
 
     <!-- SECCION FICHAS -->
     <section id="sec-fichas">
       <h2>Fichas de Jugadores</h2>
-      <div class="grid-container">
-        <div class="card">
-          <h3>Ficha Oficial</h3>
-          <p>Consulta las estadísticas registradas de cada integrante.</p>
-        </div>
-      </div>
+      <div class="card"><div class="card-title">Ficha Oficial</div><p>Consulta las estadísticas registradas de cada integrante.</p></div>
     </section>
 
     <!-- SECCION CAPITANES -->
     <section id="sec-capitanes">
       <h2>Capitanes y Presupuestos</h2>
-      <div class="grid-container">
-        <div class="card">
-          <h3>Capitán 1</h3>
-          <p>Presupuesto Restante: $50,000</p>
-        </div>
-      </div>
+      <div class="card"><div class="card-title">Capitán 1</div><p>Presupuesto Restante: $50,000</p></div>
     </section>
 
     <!-- SECCION VALORES BASE -->
@@ -435,33 +541,13 @@
       <div class="table-responsive">
         <table>
           <thead>
-            <tr>
-              <th>Rango</th>
-              <th>Media Base</th>
-              <th>Precio Base</th>
-            </tr>
+            <tr><th>Rango</th><th>Media Base</th><th>Precio Base</th></tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Oro 3</td>
-              <td>60 Media</td>
-              <td>$12,000</td>
-            </tr>
-            <tr>
-              <td>Platino 1</td>
-              <td>65 Media</td>
-              <td>$15,000</td>
-            </tr>
-            <tr>
-              <td>Diamante 2</td>
-              <td>78 Media</td>
-              <td>$28,000</td>
-            </tr>
-            <tr>
-              <td>Champion 1</td>
-              <td>85 Media</td>
-              <td>$40,000</td>
-            </tr>
+            <tr><td>Oro 3</td><td>60 Media</td><td>$12,000</td></tr>
+            <tr><td>Platino 1</td><td>65 Media</td><td>$15,000</td></tr>
+            <tr><td>Diamante 2</td><td>78 Media</td><td>$28,000</td></tr>
+            <tr><td>Champion 1</td><td>85 Media</td><td>$40,000</td></tr>
           </tbody>
         </table>
       </div>
@@ -470,17 +556,16 @@
     <!-- SECCION ADMIN -->
     <section id="sec-admin">
       <h2>Panel Admin</h2>
-      <div class="card" style="margin-bottom: 20px;">
-        <h3>⚽ Registrar Marcador Oficial</h3>
-        <div class="form-group" style="margin-top: 15px;">
-          <label>Resultado</label>
+      <div class="card">
+        <div class="card-title">⚽ Registrar Marcador Oficial</div>
+        <div class="form-group">
           <input type="text" placeholder="Ej: Juárez FC 6 - 3 Mazatlán">
         </div>
-        <button class="btn">Guardar Marcador</button>
+        <button class="btn btn-green">Guardar Marcador</button>
       </div>
       <div class="card">
-        <h3>⚠️ Zona de Peligro</h3>
-        <button class="btn btn-danger" style="margin-top: 10px;">Reiniciar Base de Jugadores</button>
+        <div class="card-title">⚠️ Zona de Peligro</div>
+        <button class="btn btn-danger">Reiniciar Base de Jugadores</button>
       </div>
     </section>
 
