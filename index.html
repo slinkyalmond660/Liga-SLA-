@@ -532,17 +532,19 @@
     }
 
     function saveAllData() {
-      localStorage.setItem("sla_usersDB", JSON.stringify(usersDB));
-      localStorage.setItem("sla_equiposLigaMX", JSON.stringify(equiposLigaMX));
-      localStorage.setItem("sla_resultadosPartidos", JSON.stringify(resultadosPartidos));
-      localStorage.setItem("sla_favoritos", JSON.stringify(favoritosDB));
-      
-      renderTablaGeneral();
-      renderFichas();
-      renderCapitanes();
-      renderMercado();
-      renderJornada();
-    }
+  database.ref('liga_sla').set({
+    usersDB: usersDB,
+    equiposLigaMX: equiposLigaMX,
+    resultadosPartidos: resultadosPartidos,
+    favoritos: favoritos
+  });
+
+  renderTablaGeneral();
+  renderFichas();
+  renderCapitanes();
+  renderMercado();
+  renderJornada();
+}
 
     function toggleSidebar() {
       document.getElementById('sidebar').classList.toggle('open');
