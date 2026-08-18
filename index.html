@@ -845,12 +845,20 @@ database.ref('liga_sla').on('value', (snapshot) => {
     }
 
     function renderValoresBase() {
-      const tbody = document.getElementById('tablaRangosValores');
-      tbody.innerHTML = "";
-      Object.keys(CONFIG_RANGOS).forEach(r => {
-        tbody.innerHTML += `<tr><td><b>${r}</b></td><td>${CONFIG_RANGOS[r].media} Media</td><td>$${CONFIG_RANGOS[r].precio.toLocaleString()}</td></tr>`;
-      });
-    }
+    const tbody = document.getElementById('tablaRangosValores');
+    if (!tbody) return;
+    tbody.innerHTML = "";
+    
+    // Lista directa de ejemplo (puedes ajustarla a tus rangos reales)
+    const rangosLista = [
+        { rango: "Diamante 2", media: "83", precio: "15,000,000" },
+        { rango: "Diamante 1", media: "80", precio: "10,000,000" }
+    ];
+
+    rangosLista.forEach(item => {
+        tbody.innerHTML += `<tr><td><b>${item.rango}</b></td><td>${item.media}</td><td>$${item.precio}</td></tr>`;
+    });
+}
 
     /* ADMIN PANEL FUNCIONES */
     function initAdminPanel() {
