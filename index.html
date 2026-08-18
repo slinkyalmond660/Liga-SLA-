@@ -543,13 +543,13 @@
 
       document.getElementById('teamDetailModal').classList.add('active');
     }
-
+const database = firebase.database();
+    
     function saveAllData() {
   database.ref('liga_sla').set({
     usersDB: usersDB,
     equiposLigaMX: equiposLigaMX,
     resultadosPartidos: resultadosPartidos,
-    favoritos: favoritos
   });
 
   renderTablaGeneral();
